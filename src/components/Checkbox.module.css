@@ -1,0 +1,35 @@
+.wrapper input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 0.15em solid var(--blue);
+  outline: none !important;
+  cursor: pointer;
+}
+
+.wrapper input[type="checkbox"]:focus {
+  outline: transparent;
+  box-shadow: 0 0 0 0;
+} 
+
+ .wrapper input.checked {
+  background-color: var(--purple-dark);
+  position: relative;
+  border: none;
+  transition: 0.2s;
+}
+
+.wrapper input.checked:hover{
+  background-color: var(--purple);
+}
+
+.wrapper input.checked::before {
+  content: "\2714";
+  font-size: 1rem;
+  color: #fff;
+  position: absolute;
+  right: 6px;
+}

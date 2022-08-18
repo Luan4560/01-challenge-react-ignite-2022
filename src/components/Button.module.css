@@ -1,0 +1,17 @@
+.btn_container {
+  background-color: var(--blue-dark);
+  padding: 1rem;
+  border-radius: 8px;
+  color: var(--gray-100);
+  cursor: pointer;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  transition: 0.2s;
+}
+
+.btn_container:not(:disabled):hover {
+  background-color: var(--blue);
+}

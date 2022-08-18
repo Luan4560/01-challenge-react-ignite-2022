@@ -1,0 +1,11 @@
+.task_container {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+
+  background-color: var(--gray-500);
+  border-radius: 8px;
+  border: 1px solid var(--gray-400);
+  padding: 1rem;
+  margin-bottom: .75rem;
+}
