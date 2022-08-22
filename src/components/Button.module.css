@@ -15,3 +15,8 @@
 .btn_container:not(:disabled):hover {
   background-color: var(--blue);
 }
+
+.btn_container:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}

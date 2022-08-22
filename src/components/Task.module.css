@@ -1,11 +1,44 @@
 .task_container {
   display: flex;
   align-items: center;
-  gap: .75rem;
+  justify-content: space-between;
 
   background-color: var(--gray-500);
   border-radius: 8px;
   border: 1px solid var(--gray-400);
   padding: 1rem;
   margin-bottom: .75rem;
+}
+
+.task_description {
+  display: flex;
+  gap: .75rem;
+}
+
+.lineThrough {
+  text-decoration: line-through;
+}
+
+.task_container button {
+  background-color: inherit;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  outline: 0;
+  transition: 0.2s;
+  border-radius: 4px;
+}
+
+.task_container button:hover {
+  border-radius: 4px;
+  background-color: var(--gray-400);
+}
+
+.task_container button svg {
+  color: var(--gray-300);
+  
+}
+
+.task_container button svg:hover {
+  color: var(--danger);
 }

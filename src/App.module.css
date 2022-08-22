@@ -4,3 +4,12 @@
   margin: 0 auto;
   margin-top: calc(0px - 2.4rem - 6px);
 }
+
+form {
+  width: 100%;
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
