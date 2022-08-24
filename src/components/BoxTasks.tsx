@@ -2,27 +2,23 @@ import { Task } from "./Task";
 
 import styles from "./BoxTasks.module.css";
 import ClipboardImg from "../assets/clipboard.svg";
-import { useState } from "react";
 
 interface TaskData {
   id: string;
   task: string;
   checked?: boolean;
-  total_done: number;
 }
 
 interface BoxTasksProps {
   tasks: TaskData[];
   onDeleteTask: (task: any) => void;
+  onChecked: (task: string) => void;
 }
 
-export const BoxTasks = ({ tasks, onDeleteTask }: BoxTasksProps) => {
+export const BoxTasks = ({ tasks, onDeleteTask, onChecked }: BoxTasksProps) => {
   const hasTask = tasks.length > 0;
-  const [numberOfTaskDone, setNumberOfTaskDone] = useState(0);
 
-  const handleTaskDone = () => {
-    setNumberOfTaskDone((prev) => prev + 1);
-  };
+  const numberOfTaskDone = tasks.filter((task) => task.checked === true).length;
 
   return (
     <>
@@ -35,7 +31,9 @@ export const BoxTasks = ({ tasks, onDeleteTask }: BoxTasksProps) => {
 
           <div className={styles.tasks_done}>
             <strong>Concluídas</strong>
-            <span className={styles.tasks_tag}>{numberOfTaskDone}</span>
+            <span className={styles.tasks_tag}>
+              {numberOfTaskDone} de {tasks.length}
+            </span>
           </div>
         </header>
 
@@ -46,7 +44,7 @@ export const BoxTasks = ({ tasks, onDeleteTask }: BoxTasksProps) => {
                 key={task.id}
                 tasksTobeDone={task}
                 onDeleteTask={onDeleteTask}
-                onTaskDone={handleTaskDone}
+                onCheckedTask={onChecked}
               />
             ))}
           </>

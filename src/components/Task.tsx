@@ -8,19 +8,18 @@ interface TaskData {
   id: string;
   task: string;
   checked?: boolean;
-  total_done: number;
 }
 
 interface TaskProps {
   tasksTobeDone: TaskData;
   onDeleteTask: (task: string) => void;
-  onTaskDone: () => void;
+  onCheckedTask: (task: string) => void;
 }
 
 export const Task = ({
   tasksTobeDone,
   onDeleteTask,
-  onTaskDone,
+  onCheckedTask,
 }: TaskProps) => {
   const [hasCompletedTask, setHasCompletedTask] = useState(false);
 
@@ -28,15 +27,15 @@ export const Task = ({
     onDeleteTask(tasksTobeDone?.id);
   };
 
-  const handleCompletedTask = () => {
-    setHasCompletedTask(true);
-    onTaskDone();
+  const handleChangeCheck = () => {
+    setHasCompletedTask(!hasCompletedTask);
+    onCheckedTask(tasksTobeDone?.id);
   };
 
   return (
     <div className={styles.task_container}>
       <div className={styles.task_description}>
-        <Checkbox onClick={handleCompletedTask} />
+        <Checkbox onClick={handleChangeCheck} />
         <p className={hasCompletedTask ? styles.lineThrough : ""}>
           {tasksTobeDone.task}
         </p>

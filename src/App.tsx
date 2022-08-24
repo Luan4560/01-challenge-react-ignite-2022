@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+
 import { Header } from "./components/Header";
 import { BoxTasks } from "./components/BoxTasks";
 import { Input } from "./components/Input";
@@ -12,7 +13,6 @@ interface TaskData {
   id: string;
   task: string;
   checked?: boolean;
-  total_done: number;
 }
 
 export const App = () => {
@@ -22,7 +22,6 @@ export const App = () => {
     id: "",
     task: "",
     checked: false,
-    total_done: 0,
   });
 
   const handleAddTask = (event: FormEvent) => {
@@ -34,9 +33,14 @@ export const App = () => {
         id: uuidv4(),
         task: newTask.task,
         checked: newTask.checked,
-        total_done: newTask.total_done,
       },
     ]);
+
+    setNewTask({
+      id: "",
+      task: "",
+      checked: false,
+    });
   };
 
   const handleTaskChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -46,8 +50,18 @@ export const App = () => {
       id: "",
       task: target.value,
       checked: false,
-      total_done: 0,
     });
+  };
+
+  const handleTaskChecked = (taskTobeEdit: string) => {
+    const newArr = tasks.map((obj) => {
+      if (obj.id === taskTobeEdit) {
+        return { ...obj, checked: !obj.checked };
+      }
+
+      return obj;
+    });
+    setTask(newArr);
   };
 
   const handleDeleteTask = (taskTobeDeleted: string) => {
@@ -61,11 +75,16 @@ export const App = () => {
     <>
       <Header />
       <main className={styles.wrapper}>
-        <form>
-          <Input onChange={handleTaskChange} />
-          <Button disabled={!tasks} onClick={handleAddTask} />
+        <form onSubmit={handleAddTask}>
+          <Input onChange={handleTaskChange} value={newTask.task} />
+          <Button disabled={!tasks} />
         </form>
-        <BoxTasks tasks={tasks} onDeleteTask={handleDeleteTask} />
+
+        <BoxTasks
+          tasks={tasks}
+          onDeleteTask={handleDeleteTask}
+          onChecked={handleTaskChecked}
+        />
       </main>
     </>
   );
